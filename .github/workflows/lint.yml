@@ -1,0 +1,37 @@
+
+name: Lua Lint & Format Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Lua
+        uses: leafo/setup-lua@v9
+        with:
+          lua-version: '5.4'
+
+      - name: Install luacheck
+        run: |
+          luarocks install luacheck
+
+      - name: Run luacheck
+        run: |
+          luacheck lua
+
+      - name: Install stylua (optional)
+        run: |
+          curl -sSfLo stylua.tar.gz https://github.com/JohnnyMorganz/StyLua/releases/latest/download/stylua-linux-x86_64.tar.gz
+          tar -xzf stylua.tar.gz
+          sudo mv stylua /usr/local/bin
+
+      - name: Run stylua (format check)
+        run: |
+          stylua --check lua
