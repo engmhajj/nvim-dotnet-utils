@@ -1,1 +1,1 @@
-require("dotnet-utils").setup()
+require("dotnet-terminal").setup()

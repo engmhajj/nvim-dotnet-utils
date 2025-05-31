@@ -1,0 +1,10 @@
+
+# Ignore swap files, backup files, and compiled Lua cache
+*.swp
+*.swo
+*.bak
+*.cache
+*.luac
+
+# Ignore node_modules or other user files if any
+node_modules/
